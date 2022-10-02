@@ -1,2 +1,2 @@
-hello good morning
-hello world
+echo "hello good morning"
+
