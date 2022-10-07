@@ -1,2 +1,25 @@
-hello good morning
-hello world
+
+  pipeline {
+    agent any
+
+    stages {
+        stage('find_user') {
+            steps {
+                sh '''
+                    echo "finding the user"
+                    whoami
+                '''
+            }
+        }
+            stage('find_working_dir') {
+            steps {
+                sh '''
+                    echo "present woring dir"
+                    pwd                    
+                '''
+            }
+        }
+        
+    }
+    
+}
