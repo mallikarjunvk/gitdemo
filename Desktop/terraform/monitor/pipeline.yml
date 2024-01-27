@@ -1,0 +1,45 @@
+# trigger:
+# - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  # Define your Terraform variables here
+  location: 'eastus'
+  subscription_id: 'd8f91232-3cb0-4b1c-9a92-e0a39a04dbfa'
+  resource_group: 'WEB-SERVER_GROUP'
+  vm_name: 'WEB-SERVER'
+
+steps:
+# - task: UseDotNet@2
+#   inputs:
+#     packageType: 'sdk'
+#     version: '2.x'
+#     installationPath: $(Agent.ToolsDirectory)/dotnet
+
+# - script: |
+#   #   # Install Terraform
+#   #   wget https://releases.hashicorp.com/terraform/0.15.5/terraform_0.15.5_linux_amd64.zip
+#   #   unzip terraform_0.15.5_linux_amd64.zip
+#   #   sudo mv terraform /usr/local/bin/
+#   # displayName: 'Install Terraform'
+
+# - script: |
+#     # Authenticate with Azure
+#     # az login --service-principal --username $(servicePrincipalId) --password $(servicePrincipalKey) --tenant $(tenantId)
+#     # az account set --subscription $(subscriptionId)
+
+- script: |
+    terraform init 
+
+- script: |
+    export_TF_VAR_location=$(location)
+    export_TF_VAR_subscription_id=$(subscription_id)
+    export_TF_VAR_resource_group=$(resource_group)
+    export_TF_VAR_vm_name=$(vm_name)
+    terraform plan 
+ 
+ - script: |
+    terraform apply -auto-approve 
+  displayName: 'Terraform Apply'
