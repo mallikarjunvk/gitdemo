@@ -1,0 +1,13 @@
+[
+    {
+        "ResourceGroup": "WEB-SERVER_GROUP",
+        "VMName" : [
+        "web-server",
+        "my_server"]
+    },
+    {
+        "ResourceGroup": "ALERT-SERVER",
+        "VMName" : [
+        "test-server"]
+    }
+]
